@@ -1,0 +1,30 @@
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#map {
+  height: 100%;
+}
+
+#loginButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  z-index: 800;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+#userPosition {
+  position: absolute;
+  top: 13px;
+  left: 50px;
+  padding: 10px 20px;
+  z-index: 800;
+  background-color: #fff;
+  border: 1px solid #000;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Map Locator</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <button id="loginButton">Login</button>
+    <div id="userPosition"></div>
+    <script>
+      var showMap = L.map("map");
+      document.getElementById("loginButton").onclick = function () {
+        location.href = "/login";
+      };
+      if (!navigator.geolocation) {
+        alert("Your browser does not support geolocation");
+      } else {
+        navigator.geolocation.getCurrentPosition(setPosition);
+      }
+      function setPosition(position) {
+        var userP = document.getElementById("userPosition");
+        const posLat = position.coords.latitude;
+        const posLon = position.coords.longitude;
+        userP.innerHTML =
+          "Your Latitude: " + posLat + "<br>" + "Your Longitude: " + posLon;
+        showMap.setView([posLat, posLon], 10);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+          showMap
+        );
+        L.marker([posLat, posLon])
+          .addTo(showMap)
+          .bindPopup(
+            "Greetings welcome to Map Locator LK App!<br><br>This is your current location, and the coordinates can be seen in the top left corner.<br><br> Login to see the last 5 locations of app users."
+          )
+          .openPopup();
+      }
+    </script>
+  </body>
+</html>
